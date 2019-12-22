@@ -1,8 +1,14 @@
 import React from "react";
 
 export interface Spacing {
+  isCustom: boolean;
   baseValue: number;
+  baseValues: number[];
   multipliers: number[];
+}
+
+export interface StyleContextState {
+  spacing: Spacing;
 }
 
 type StyleContextProps = {
@@ -12,7 +18,9 @@ type StyleContextProps = {
 
 export const defaultValue = {
   spacing: {
+    isCustom: false,
     baseValue: 16,
+    baseValues: [],
     multipliers: [
       0.25,
       0.5,
@@ -34,6 +42,9 @@ export const defaultValue = {
   }
 };
 
-const StyleContext = React.createContext<Partial<StyleContextProps>>({});
+const StyleContext = React.createContext<StyleContextProps>({
+  ...defaultValue,
+  setSpacing: () => {}
+});
 
 export default StyleContext;

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Range from "../input/Range";
-import StyleContext from "../../context/StyleContext";
+import StyleContext, { defaultValue } from "../../context/StyleContext";
 
 const SpacingController: React.FC = () => {
   const { spacing, setSpacing } = useContext(StyleContext);
@@ -15,6 +15,13 @@ const SpacingController: React.FC = () => {
           setSpacing({ ...spacing, baseValue: +event.target.value });
         }}
       />
+      <button
+        onClick={() => {
+          setSpacing(defaultValue.spacing);
+        }}
+      >
+        Reset
+      </button>
     </div>
   );
 };

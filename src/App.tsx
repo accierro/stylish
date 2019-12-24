@@ -5,6 +5,7 @@ import StyleContext, {
   Spacing,
   StyleContextState
 } from "./context/StyleContext";
+import ColorView from "./components/views/ColorView";
 
 const App: React.FC = () => {
   const [state, setState] = useState<StyleContextState>(defaultValue);
@@ -26,6 +27,7 @@ const App: React.FC = () => {
         }}
       >
         <SpacingView />
+        <ColorView />
       </StyleContext.Provider>
     </div>
   );

@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import { Machine, assign } from "xstate";
 import { useMachine } from "@xstate/react";
-import { HSLColor, ColorContext } from "./types";
+import { HSLColor, ColorContext, HSLColorLimit } from "./types";
 import convert from "color-convert";
-
-type SingleColorProps = {
-  title: string;
-};
 
 interface ColorSchemaState {
   states: {
@@ -60,6 +56,7 @@ function calculateColors(colors: ColorContext[]): ColorContext[] {
       l: firstColor.l - (diff.l / middleIndex) * i
     };
   }
+  //Second gap
   diff = {
     h: middle.h - lastColor.h,
     s: middle.s - lastColor.s,
@@ -161,7 +158,12 @@ const initialMachine = Machine<IColorContext, ColorSchemaState, ColorEvent>(
   }
 );
 
-const SingleColor: React.FC<SingleColorProps> = ({ title }) => {
+type SingleColorProps = {
+  title?: string;
+  limit?: HSLColorLimit;
+};
+
+const SingleColor: React.FC<SingleColorProps> = ({ title, limit }) => {
   const [current, send] = useMachine(initialMachine);
   console.log(current);
 
@@ -183,6 +185,7 @@ const SingleColor: React.FC<SingleColorProps> = ({ title }) => {
 
   return (
     <div>
+      {title ? title : null}
       {current.context.colors.map((d, i) => {
         return (
           <input
@@ -191,6 +194,17 @@ const SingleColor: React.FC<SingleColorProps> = ({ title }) => {
             value={"#" + convert.hsl.hex([d.color.h, d.color.s, d.color.l])}
             onChange={e => {
               const hsl = convert.hex.hsl(e.target.value);
+              if (limit) {
+                if (limit.h && (limit.h.max < hsl[0] || limit.h.min > hsl[0])) {
+                  return;
+                }
+                if (limit.s && (limit.s.max < hsl[1] || limit.s.min > hsl[1])) {
+                  return;
+                }
+                if (limit.l && (limit.l.max < hsl[2] || limit.l.min > hsl[2])) {
+                  return;
+                }
+              }
               send({
                 type: "SELECT_COLOR",
                 id: i,

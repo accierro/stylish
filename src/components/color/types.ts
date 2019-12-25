@@ -4,6 +4,14 @@ export type HSLColor = {
   l: number;
 };
 
+type MinMax = { min: number; max: number };
+
+export type HSLColorLimit = {
+  h?: MinMax;
+  s?: MinMax;
+  l?: MinMax;
+};
+
 export type ColorContext = {
   color: HSLColor;
   disabled: boolean;

@@ -6,12 +6,12 @@ import StyleContext, {
   StyleContextState
 } from "./context/StyleContext";
 import ColorView from "./components/views/ColorView";
+import ShadowView from "./components/views/ShadowView";
 
 const App: React.FC = () => {
   const [state, setState] = useState<StyleContextState>(defaultValue);
   const setSpacing = useCallback(
     (value: Spacing) => {
-      console.log(value);
       setState(prev => {
         return { ...prev, spacing: value };
       });
@@ -28,6 +28,7 @@ const App: React.FC = () => {
       >
         <SpacingView />
         <ColorView />
+        <ShadowView />
       </StyleContext.Provider>
     </div>
   );

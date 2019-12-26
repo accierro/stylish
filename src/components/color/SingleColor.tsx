@@ -72,10 +72,6 @@ function calculateColors(colors: ColorContext[]): ColorContext[] {
   return newArr;
 }
 
-function HSLtoString(hsl: HSLColor): string {
-  return `hsl(${hsl.h}, ${hsl.s}%,${hsl.l}%)`;
-}
-
 const initialMachine = Machine<IColorContext, ColorSchemaState, ColorEvent>(
   {
     id: "initialState",
@@ -165,7 +161,6 @@ type SingleColorProps = {
 
 const SingleColor: React.FC<SingleColorProps> = ({ title, limit }) => {
   const [current, send] = useMachine(initialMachine);
-  console.log(current);
 
   useEffect(() => {
     if (current.matches("idle")) {

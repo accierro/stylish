@@ -11,7 +11,8 @@ const BasicExample: React.FC<{ style: any; title: string }> = ({
         border: "none",
         padding: "30px",
         margin: "20px",
-        borderRadius: "5px"
+        borderRadius: "5px",
+        transition: "box-shadow 0.3s"
       }}
     >
       {title}

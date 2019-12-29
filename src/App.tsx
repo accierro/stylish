@@ -7,6 +7,7 @@ import StyleContext, {
 } from "./context/StyleContext";
 import ColorView from "./components/views/ColorView";
 import ShadowView from "./components/views/ShadowView";
+import ColorPickerWrapper from "./components/color/ColorPickerWrapper";
 
 const App: React.FC = () => {
   const [state, setState] = useState<StyleContextState>(defaultValue);
@@ -29,6 +30,7 @@ const App: React.FC = () => {
         <SpacingView />
         <ColorView />
         <ShadowView />
+        <ColorPickerWrapper />
       </StyleContext.Provider>
     </div>
   );

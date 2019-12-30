@@ -32,7 +32,6 @@ const App: React.FC = () => {
         <SpacingView />
         <ColorView />
         <ShadowView />
-        <ColorPickerWrapper />
       </StyleContext.Provider>
     </div>
   );

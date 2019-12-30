@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Machine, assign } from "xstate";
 import { useMachine } from "@xstate/react";
 import { HSLColor, ColorContext, HSLColorLimit } from "./types";
 import convert from "color-convert";
+import ColorPickerWrapper from "./ColorPickerWrapper";
+import ColorExample from "./ColorExample";
 
 interface ColorSchemaState {
   states: {
@@ -177,36 +179,35 @@ const SingleColor: React.FC<SingleColorProps> = ({ title, limit }) => {
       }
     }
   }, [current, send]);
-
   return (
     <div>
       {title ? title : null}
       {current.context.colors.map((d, i) => {
         return (
-          <input
-            disabled={d.disabled}
-            type="color"
-            value={"#" + convert.hsl.hex([d.color.h, d.color.s, d.color.l])}
-            onChange={e => {
-              const hsl = convert.hex.hsl(e.target.value);
-              if (limit) {
-                if (limit.h && (limit.h.max < hsl[0] || limit.h.min > hsl[0])) {
-                  return;
+          <>
+            <ColorExample
+              disabled={d.disabled}
+              color={d.color}
+              onChange={hsl => {
+                if (limit) {
+                  if (limit.h && (limit.h.max < hsl.h || limit.h.min > hsl.h)) {
+                    return;
+                  }
+                  if (limit.s && (limit.s.max < hsl.s || limit.s.min > hsl.s)) {
+                    return;
+                  }
+                  if (limit.l && (limit.l.max < hsl.l || limit.l.min > hsl.l)) {
+                    return;
+                  }
                 }
-                if (limit.s && (limit.s.max < hsl[1] || limit.s.min > hsl[1])) {
-                  return;
-                }
-                if (limit.l && (limit.l.max < hsl[2] || limit.l.min > hsl[2])) {
-                  return;
-                }
-              }
-              send({
-                type: "SELECT_COLOR",
-                id: i,
-                color: { h: hsl[0], s: hsl[1], l: hsl[2] }
-              });
-            }}
-          />
+                send({
+                  type: "SELECT_COLOR",
+                  id: i,
+                  color: { ...hsl }
+                });
+              }}
+            />
+          </>
         );
       })}
     </div>

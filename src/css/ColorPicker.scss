@@ -7,6 +7,45 @@
   position: absolute;
   top: 25px;
   background: $grey-color7;
+  padding-bottom: 8px;
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    button {
+      appearance: none;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .ok-button {
+      background: $base-color4;
+      color: $grey-color7;
+      margin-right: 8px;
+      &:hover {
+        background: $base-color3;
+      }
+      &:active {
+        background: $base-color2;
+      }
+    }
+
+    .cancel-button {
+      margin-right: 5%;
+      background: $grey-color7;
+      color: $base-color3;
+      font-weight: 500;
+      &:hover {
+        color: $base-color2;
+      }
+      &:active {
+        color: $base-color1;
+      }
+    }
+  }
 
   .saturation-container {
     width: 255px;

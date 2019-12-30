@@ -3,13 +3,29 @@ import ColorPickerContext, {
   defaultColor
 } from "../../context/ColorPickerContext";
 import ColorPicker from "./ColorPicker";
+import { HSLColor } from "./types";
 
-const ColorPickerWrapper: React.FC = () => {
-  const [color, setColor] = useState(defaultColor);
+type ColorPickerWrapper = {
+  initialColor?: HSLColor;
+  onSave: (color: HSLColor) => any;
+  onCancel: () => any;
+};
+
+const ColorPickerWrapper: React.FC<ColorPickerWrapper> = ({
+  initialColor = defaultColor,
+  onSave,
+  onCancel
+}) => {
+  const [color, setColor] = useState(initialColor);
 
   return (
     <ColorPickerContext.Provider value={{ color, setColor }}>
-      <ColorPicker />
+      <ColorPicker
+        onSave={() => {
+          onSave(color);
+        }}
+        onCancel={onCancel}
+      />
     </ColorPickerContext.Provider>
   );
 };

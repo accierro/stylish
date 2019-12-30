@@ -16,7 +16,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
   label
 }) => {
   return (
-    <div>
+    <div className="number-input">
       <h4>{label}</h4>
       <input
         type="number"

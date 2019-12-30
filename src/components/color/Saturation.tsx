@@ -62,10 +62,9 @@ const Saturation: React.FC = () => {
   const hsv = convert.hsl.hsv([color.h, color.s, color.l]);
   return (
     <div
+      className="saturation-container"
       ref={ref}
       style={{
-        width: "255px",
-        height: "100px",
         background: `hsl(${color.h}, 100%, 50%)`
       }}
       onMouseDown={e => {
@@ -74,35 +73,14 @@ const Saturation: React.FC = () => {
         window.addEventListener("mouseup", onMouseUp);
       }}
     >
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          background:
-            "linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0))"
-        }}
-      >
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "relative",
-            overflow: "hidden",
-            background:
-              "linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0))"
-          }}
-        >
+      <div className="white-gradient">
+        <div className="black-gradient">
           <div
+            className="color-pointer"
             style={{
-              width: "10px",
-              height: "10px",
               border: `1px solid ${color.l > 50 ? "black" : "white"}`,
-              position: "absolute",
-              transform: "translate(-5px, -5px)",
-              pointerEvents: "none",
               left: hsv[1] + "%",
-              top: 100 - hsv[2] + "%",
-              borderRadius: "50%"
+              top: 100 - hsv[2] + "%"
             }}
           ></div>
         </div>

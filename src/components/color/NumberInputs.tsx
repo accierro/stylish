@@ -13,7 +13,7 @@ const NumberInputs: React.FC = () => {
     [setColor]
   );
   return (
-    <div>
+    <div className="color-numbers">
       <NumberInput
         label="H:"
         max={360}

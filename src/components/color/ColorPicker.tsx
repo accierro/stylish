@@ -72,7 +72,7 @@ const ColorPicker: React.FC = () => {
   );
   console.log("Rerender");
   return (
-    <div>
+    <div className="color-picker">
       <Saturation />
       <Hue />
       <NumberInputs />

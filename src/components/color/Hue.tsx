@@ -5,7 +5,8 @@ import { HSLColor } from "./types";
 const Hue: React.FC = () => {
   const { color, setColor } = useContext(ColorPickerContext);
   return (
-    <div>
+    <>
+      <h3>Hue</h3>
       <input
         type="range"
         min={0}
@@ -15,14 +16,8 @@ const Hue: React.FC = () => {
           setColor((prev: HSLColor) => ({ ...prev, h: +e.target.value }));
           e.persist();
         }}
-        style={{
-          width: "100%",
-          WebkitAppearance: "none",
-          background:
-            "linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)"
-        }}
       />
-    </div>
+    </>
   );
 };
 

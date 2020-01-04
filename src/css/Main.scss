@@ -1,7 +1,40 @@
+@import "./Variables.scss";
 html {
   font-family: "Montserrat", sans-serif;
 }
 
+body {
+  margin: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
 button {
   font-family: "Montserrat", sans-serif;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: 5% auto 5%;
+  background: $grey-color7;
+}
+
+.container {
+  grid-column-start: 2;
+
+  .color-view {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.single-color-view {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
 }

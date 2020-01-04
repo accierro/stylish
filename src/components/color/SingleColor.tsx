@@ -180,11 +180,11 @@ const SingleColor: React.FC<SingleColorProps> = ({ title, limit }) => {
     }
   }, [current, send]);
   return (
-    <div>
-      {title ? title : null}
+    <div className="single-color-view">
+      <h4>{title ? title : null}</h4>
       {current.context.colors.map((d, i) => {
         return (
-          <>
+          <div className="color-samples">
             <ColorExample
               disabled={d.disabled}
               color={d.color}
@@ -207,7 +207,7 @@ const SingleColor: React.FC<SingleColorProps> = ({ title, limit }) => {
                 });
               }}
             />
-          </>
+          </div>
         );
       })}
     </div>

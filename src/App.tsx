@@ -22,15 +22,16 @@ const App: React.FC = () => {
     [setState]
   );
   return (
-    <div>
+    <div className="container">
       <StyleContext.Provider
         value={{
           spacing: state.spacing,
           setSpacing
         }}
       >
-        <SpacingView />
         <ColorView />
+
+        <SpacingView />
         <ShadowView />
       </StyleContext.Provider>
     </div>

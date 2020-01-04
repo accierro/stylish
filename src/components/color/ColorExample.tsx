@@ -29,15 +29,30 @@ const ColorExample: React.FC<ColorExample> = ({
         }}
       ></div>
       {show ? (
-        <ColorPickerWrapper
-          onSave={hsl => {
-            setShow(false);
-            onChange(hsl);
-          }}
-          onCancel={() => {
-            setShow(false);
-          }}
-        />
+        <>
+          <div
+            style={{
+              background: "transparent",
+              position: "fixed",
+              width: "100%",
+              minHeight: "100%",
+              top: 0,
+              left: 0
+            }}
+            onClick={() => {
+              setShow(false);
+            }}
+          ></div>
+          <ColorPickerWrapper
+            onSave={hsl => {
+              setShow(false);
+              onChange(hsl);
+            }}
+            onCancel={() => {
+              setShow(false);
+            }}
+          />
+        </>
       ) : null}
     </>
   );

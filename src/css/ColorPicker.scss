@@ -8,11 +8,18 @@
   top: 25px;
   background: $grey-color7;
   padding-bottom: 8px;
-
+  z-index: 1;
   .buttons {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    .example {
+      flex: 1;
+      height: 27px;
+      border-radius: 4px;
+      margin-left: 5%;
+      margin-right: 10%;
+    }
     button {
       appearance: none;
       border: none;
@@ -160,6 +167,7 @@
       }
 
       input[type="number"] {
+        text-align: center;
         border: none;
         width: 50px;
         appearance: none;

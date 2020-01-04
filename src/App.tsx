@@ -7,7 +7,6 @@ import StyleContext, {
 } from "./context/StyleContext";
 import ColorView from "./components/views/ColorView";
 import ShadowView from "./components/views/ShadowView";
-import ColorPickerWrapper from "./components/color/ColorPickerWrapper";
 import "./css/ColorPicker.scss";
 import "./css/Main.scss";
 

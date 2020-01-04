@@ -8,23 +8,37 @@ type ColorExample = {
   disabled: boolean;
 };
 
+function getWidth() {
+  return Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+}
+
 const ColorExample: React.FC<ColorExample> = ({
   onChange,
   color,
   disabled
 }) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState<"right" | "left" | null>(null);
   return (
     <>
       <div
+        className={`color-example ${disabled ? "" : "active"}`}
         style={{
-          width: "20px",
-          height: "20px",
           background: `hsl(${color.h}, ${color.s}%, ${color.l}%)`
         }}
-        onClick={() => {
+        onClick={e => {
           if (!disabled) {
-            setShow(true);
+            const dimensions = (e.target as Element).getBoundingClientRect();
+            if (dimensions.x + 255 + 50 > getWidth()) {
+              setShow("left");
+              return;
+            }
+            setShow("right");
           }
         }}
       ></div>
@@ -40,16 +54,18 @@ const ColorExample: React.FC<ColorExample> = ({
               left: 0
             }}
             onClick={() => {
-              setShow(false);
+              setShow(null);
             }}
           ></div>
           <ColorPickerWrapper
+            initialColor={color}
+            position={show}
             onSave={hsl => {
-              setShow(false);
+              setShow(null);
               onChange(hsl);
             }}
             onCancel={() => {
-              setShow(false);
+              setShow(null);
             }}
           />
         </>

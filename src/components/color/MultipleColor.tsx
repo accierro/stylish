@@ -9,25 +9,27 @@ const MultipleColor: React.FC<MultipleColorProps> = ({ title }) => {
   const [colors, setColors] = useState([1]);
 
   return (
-    <div>
-      {title}
-      {colors &&
-        colors.map(d => {
-          return (
-            <div key={d}>
-              <SingleColor key={d} />
-              <button
-                onClick={() => {
-                  setColors(prev => {
-                    return prev.filter(a => a !== d);
-                  });
-                }}
-              >
-                Delete
-              </button>
-            </div>
-          );
-        })}
+    <div className="multiple-colors-view">
+      <h4>{title}</h4>
+      <div className="multiple-color-column">
+        {colors &&
+          colors.map(d => {
+            return (
+              <React.Fragment key={d}>
+                <SingleColor key={d} />
+                <button
+                  onClick={() => {
+                    setColors(prev => {
+                      return prev.filter(a => a !== d);
+                    });
+                  }}
+                >
+                  Delete
+                </button>
+              </React.Fragment>
+            );
+          })}
+      </div>
       <button
         onClick={() => {
           setColors(prev => {

@@ -15,9 +15,10 @@ const MultipleColor: React.FC<MultipleColorProps> = ({ title }) => {
         {colors &&
           colors.map(d => {
             return (
-              <React.Fragment key={d}>
+              <div className="container" key={d}>
                 <SingleColor key={d} />
                 <button
+                  className="delete-button"
                   onClick={() => {
                     setColors(prev => {
                       return prev.filter(a => a !== d);
@@ -26,21 +27,22 @@ const MultipleColor: React.FC<MultipleColorProps> = ({ title }) => {
                 >
                   Delete
                 </button>
-              </React.Fragment>
+              </div>
             );
           })}
+        <button
+          className="add-button"
+          onClick={() => {
+            setColors(prev => {
+              if (prev.length === 0) return [1];
+              const lastIndex = prev[prev.length - 1];
+              return [...prev, lastIndex + 1];
+            });
+          }}
+        >
+          Add Color
+        </button>
       </div>
-      <button
-        onClick={() => {
-          setColors(prev => {
-            if (prev.length === 0) return [1];
-            const lastIndex = prev[prev.length - 1];
-            return [...prev, lastIndex + 1];
-          });
-        }}
-      >
-        Add
-      </button>
     </div>
   );
 };

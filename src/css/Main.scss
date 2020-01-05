@@ -83,14 +83,66 @@ button {
     display: flex;
     flex: 1;
     flex-direction: column;
+    align-items: center;
+
+    .container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .delete-button {
+        align-self: flex-end;
+        border: none;
+        appearance: none;
+        padding: 5px 8px;
+        font-size: 16px;
+        background: none;
+        color: $red-color4;
+        cursor: pointer;
+        position: relative;
+
+        &::after {
+          content: "";
+          height: 2px;
+          width: 0px;
+          position: absolute;
+          background: $red-color4;
+          transition: width 0.3s ease;
+          bottom: 0;
+          left: 0;
+          border-radius: 5px 5px 0 0;
+        }
+
+        &:hover {
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .add-button {
+      width: 100px;
+      background: linear-gradient($base-color4, $base-color3);
+      color: $grey-color7;
+      appearance: none;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      margin-top: 16px;
+      font-size: 16px;
+      cursor: pointer;
+      &:hover {
+        background: $base-color3;
+      }
+      &:active {
+        background: $base-color2;
+      }
+    }
 
     .single-color-view {
       border: none;
       padding: 0;
+      width: 100%;
     }
-  }
-
-  button {
-    // display: none;
   }
 }

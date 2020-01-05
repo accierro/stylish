@@ -8,7 +8,7 @@
   top: 25px;
   background: $grey-color7;
   padding-bottom: 8px;
-  z-index: 1;
+  z-index: 10;
   .buttons {
     display: flex;
     flex-direction: row;
@@ -29,7 +29,7 @@
       cursor: pointer;
     }
     .ok-button {
-      background: $base-color4;
+      background: linear-gradient($base-color4, $base-color3);
       color: $grey-color7;
       margin-right: 8px;
       &:hover {

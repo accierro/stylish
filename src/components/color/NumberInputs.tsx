@@ -27,7 +27,7 @@ const NumberInputs: React.FC = () => {
         label="S:"
         max={100}
         min={0}
-        value={color.s}
+        value={Math.ceil(color.s)}
         onChange={e => {
           onChange(e, "s");
         }}
@@ -36,7 +36,7 @@ const NumberInputs: React.FC = () => {
         label="L:"
         max={100}
         min={0}
-        value={color.l}
+        value={Math.ceil(color.l)}
         onChange={e => {
           onChange(e, "l");
         }}

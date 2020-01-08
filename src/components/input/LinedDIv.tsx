@@ -1,4 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
+import { colorStateToString } from "../color/helpers";
+import { HSLColor } from "../color/types";
 
 function createNumLines(num: number) {
   const arr = [];
@@ -8,13 +10,18 @@ function createNumLines(num: number) {
   return arr;
 }
 
-const LinedDiv: React.FC = () => {
+type LinedDivProps = {
+  varName: string;
+  colors: HSLColor[];
+};
+
+const LinedDiv: React.FC<LinedDivProps> = ({ varName, colors }) => {
   const lineRef = useRef<HTMLDivElement | null>(null);
   const [numOfLines, setNumOfLines] = useState<number>(1);
 
   useEffect(() => {
     if (lineRef.current) {
-      const height = lineRef.current.getBoundingClientRect().height;
+      const height = lineRef.current.getBoundingClientRect().height - 16;
       setNumOfLines(height / 19);
     }
   }, [lineRef.current]);
@@ -27,15 +34,14 @@ const LinedDiv: React.FC = () => {
         className="code-snippet-text-area"
         contentEditable="true"
         onInput={e => {
-          const num = (e.target as Element).innerHTML
-            .split("</pre>")
-            .filter(d => d !== "").length;
+          const num =
+            ((e.target as Element).getBoundingClientRect().height - 16) / 19;
           if (numOfLines !== num) {
             setNumOfLines(num);
           }
         }}
       >
-        <pre>Hello</pre>
+        <pre>{colorStateToString(colors, varName)}</pre>
       </div>
     </div>
   );

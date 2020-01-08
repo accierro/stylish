@@ -4,6 +4,7 @@ import ColorPickerContext, {
 } from "../../context/ColorPickerContext";
 import ColorPicker from "./ColorPicker";
 import { HSLColor } from "./types";
+import { colorStateToString } from "../color/helpers";
 
 type ColorPickerWrapper = {
   position: "right" | "left";
@@ -19,7 +20,6 @@ const ColorPickerWrapper: React.FC<ColorPickerWrapper> = ({
   onCancel
 }) => {
   const [color, setColor] = useState(initialColor);
-
   return (
     <ColorPickerContext.Provider value={{ color, setColor }}>
       <ColorPicker

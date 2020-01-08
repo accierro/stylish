@@ -1,10 +1,16 @@
 import React from "react";
 import LinedDiv from "../input/LinedDIv";
+import { HSLColor } from "./types";
 
-const ColorMenu: React.FC = () => {
+type ColorMenuProps = {
+  varName: string;
+  colors: HSLColor[];
+};
+
+const ColorMenu: React.FC<ColorMenuProps> = ({ varName, colors }) => {
   return (
     <div>
-      <LinedDiv />
+      <LinedDiv varName={varName} colors={colors} />
     </div>
   );
 };

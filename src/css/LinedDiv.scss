@@ -18,7 +18,11 @@
 
   .code-snippet-text-area {
     padding: 8px;
-
+    align-self: flex-start;
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
     pre {
       margin: 0;
       font-family: "Montserrat", sans-serif;

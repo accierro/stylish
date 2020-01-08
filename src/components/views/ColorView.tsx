@@ -1,7 +1,6 @@
 import React from "react";
 import SingleColor from "../color/SingleColor";
 import MultipleColor from "../color/MultipleColor";
-import ColorMenu from "../color/ColorMenu";
 
 const ColorView: React.FC = () => {
   return (
@@ -9,7 +8,6 @@ const ColorView: React.FC = () => {
       <SingleColor title="Base Color" />
       <SingleColor title="Grey Color" limit={{ s: { min: 0, max: 40 } }} />
       <MultipleColor title="Ascent Color" />
-      <ColorMenu />
     </div>
   );
 };

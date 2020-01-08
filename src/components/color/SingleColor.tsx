@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { Machine, assign } from "xstate";
 import { useMachine } from "@xstate/react";
 import { HSLColor, ColorContext, HSLColorLimit } from "./types";
-import convert from "color-convert";
 import ColorExample from "./ColorExample";
+import { colorStateToString } from "./helpers";
+import ColorMenu from "./ColorMenu";
 
 interface ColorSchemaState {
   states: {
@@ -178,49 +179,56 @@ const SingleColor: React.FC<SingleColorProps> = ({ title, limit }) => {
       }
     }
   }, [current, send]);
+
   return (
-    <div className="single-color-view">
-      {title ? <h4>{title}</h4> : null}
-      <div className="color-row">
-        {current.context.colors.map((d, i) => {
-          return (
-            <div className="color-samples">
-              <ColorExample
-                disabled={d.disabled}
-                color={d.color}
-                onChange={hsl => {
-                  if (limit) {
-                    if (
-                      limit.h &&
-                      (limit.h.max < hsl.h || limit.h.min > hsl.h)
-                    ) {
-                      return;
+    <>
+      <div className="single-color-view">
+        {title ? <h4>{title}</h4> : null}
+        <div className="color-row">
+          {current.context.colors.map((d, i) => {
+            return (
+              <div className="color-samples">
+                <ColorExample
+                  disabled={d.disabled}
+                  color={d.color}
+                  onChange={hsl => {
+                    if (limit) {
+                      if (
+                        limit.h &&
+                        (limit.h.max < hsl.h || limit.h.min > hsl.h)
+                      ) {
+                        return;
+                      }
+                      if (
+                        limit.s &&
+                        (limit.s.max < hsl.s || limit.s.min > hsl.s)
+                      ) {
+                        return;
+                      }
+                      if (
+                        limit.l &&
+                        (limit.l.max < hsl.l || limit.l.min > hsl.l)
+                      ) {
+                        return;
+                      }
                     }
-                    if (
-                      limit.s &&
-                      (limit.s.max < hsl.s || limit.s.min > hsl.s)
-                    ) {
-                      return;
-                    }
-                    if (
-                      limit.l &&
-                      (limit.l.max < hsl.l || limit.l.min > hsl.l)
-                    ) {
-                      return;
-                    }
-                  }
-                  send({
-                    type: "SELECT_COLOR",
-                    id: i,
-                    color: { ...hsl }
-                  });
-                }}
-              />
-            </div>
-          );
-        })}
+                    send({
+                      type: "SELECT_COLOR",
+                      id: i,
+                      color: { ...hsl }
+                    });
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+      <ColorMenu
+        varName={title || "undefined"}
+        colors={current.context.colors.map(e => ({ ...e.color }))}
+      />
+    </>
   );
 };
 
